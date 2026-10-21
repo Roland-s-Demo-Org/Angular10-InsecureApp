@@ -71,7 +71,7 @@ export class PrototypePollutionComponent {
       // FLAG: No prototype pollution protection
       if (source[key] && typeof source[key] === 'object') {
         target[key] = target[key] || {};
-        this.deepMerge(target[key], source[key]);
+        if (!["__proto__", "constructor", "prototype"].includes(key)) this.deepMerge(target[key], source[key]);
       } else {
         target[key] = source[key]; // Permet __proto__ pollution
       }
